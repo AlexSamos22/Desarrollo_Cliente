@@ -276,7 +276,7 @@ caden4.slice(-10); //Desde la decima posiocion hasta el final
 caden4.split(" ");//Igual que en java
 
 caden4.localeCompare("jshajshasjhas")//Comparar cadenas letra a letra
-*/
+
 // ARRAYS
 
 let matriz = new Array();
@@ -286,6 +286,23 @@ let matrizComida = [
   ["risoto", "ratatuille", "fish and fish"],
 ];
 
+let funcion = (elemento, indice) => console.log(elemento);
+matrizFrutas.forEach(funcion);
+
+matrizFrutas.forEach(fila=>{
+  fila.forEach(i => {
+    console.log(i);
+  });
+});
+
+let funcion2 = (elemento) => {
+  for(let subelemento of elemento){
+    console.log(subelemento);
+  }
+}
+
+matrizComida.forEach(funcion2);
+
 for(let comida of matrizComida){
   for(let elemento of comida){
       console.log(elemento);
@@ -293,5 +310,58 @@ for(let comida of matrizComida){
 }
 
 matrizComida.length;//saber tamaño
+
+
+
+let biArray = [
+  ["Hola", "Adios", "hasta luego"],
+  ["Hi", "goodbye", "see you soon"],
+  ["bonjour", "bonsoir"]
+];
+
+//Queue
+
+biArray.shift();//Saca el primer elemento y lo muestra
+biArray.unshift();//Inserta un elemento al inicio del array y muestra la nueva longitud
+
+//Pila/stack
+
+biArray.pop();//Saca el ultimo elemento del array y lo muestra
+biArray.push();//Inserta un elemento al final del array y muestra la nueva longitud
+
+//Convertir la matriz a string
+biArray.toString();
+
+biArray[1].slice(1,2);//Igual que en los string extrae la posicion indicada sin contar con la ultima puesta deja la matriz original sin modificar
+
+biArray.splice(1,2, "pera", "kiwi");//Devuelve el elemento pero lo elimina de la matriz original y puede reemplazar y añadir
+
+biArray[1].concat("hola");//No modifica el original
+
+biArray[0].indexOf("hola");//muestra la pocion de la palabra que encuentra, si existe mas de 1 te devuelve el primero que encuentra
+
+biArray[0].includes("hola");//devueve true o false si el elemento esta dentro
+
+biArray[0].lastIndexOf("hola"); //Igual que index pero devuelve el ultimo
+
+let almacen = [ //matriz de objetos
+  {fruta: "manzana", existencias: 0},
+  {fruta: "melon", existencias: 3},
+  {fruta: "uva", existencias: 4},
+  {fruta: "pera", existencias: 6},
+];
+
+
+
+almacen.findIndex(elemento=>elemento.fruta=="pera");//Indica la posicion en la que esta el elemento cuyo nombre concuerde
+
+let objeto =almacen.find(elemento=>elemento.fruta=="pera");//Devuelve toda la fila
+console.log(objeto.existencias);//Devuelve las existencias del objeto pera
+*/
+
+
+
+
+
 
 
