@@ -322,7 +322,7 @@ let biArray = [
 //Queue
 
 biArray.shift();//Saca el primer elemento y lo muestra
-biArray.unshift();//Inserta un elemento al inicio del array y muestra la nueva longitud
+biArray.push();//Inserta un elemento al inicio del array y muestra la nueva longitud
 
 //Pila/stack
 
@@ -344,24 +344,81 @@ biArray[0].includes("hola");//devueve true o false si el elemento esta dentro
 
 biArray[0].lastIndexOf("hola"); //Igual que index pero devuelve el ultimo
 
+
+
 let almacen = [ //matriz de objetos
-  {fruta: "manzana", existencias: 0},
-  {fruta: "melon", existencias: 3},
-  {fruta: "uva", existencias: 4},
-  {fruta: "pera", existencias: 6},
+  {nombre: "manzana", existencias: 0},
+  {nombre: "melon", existencias: 3},
+  {nombre: "uva", existencias: 4},
+  {nombre: "pera", existencias: 6},
 ];
 
 
 
-almacen.findIndex(elemento=>elemento.fruta=="pera");//Indica la posicion en la que esta el elemento cuyo nombre concuerde
+almacen.findIndex(elemento=>elemento.nombre=="pera");//Indica la posicion en la que esta el elemento cuyo nombre concuerde
 
-let objeto =almacen.find(elemento=>elemento.fruta=="pera");//Devuelve toda la fila
+let objeto =almacen.find(elemento=>elemento.nombre=="pera");//Devuelve toda la fila
 console.log(objeto.existencias);//Devuelve las existencias del objeto pera
+
+
+almacen.filter(elemento=>elemento.existencias>4);//Devuekve un elemento que cumple con los requisitos
+almacen.filter(elemento=>(elemento.nombre=="manzana") && (elemento.existencias>4));
+
+let numeros =[5,1,2,11,22];
+
+numeros.map(elemento=>elemento*2)//Devuelve el resultado de la operacion de los elementos de una matriz, multiplica por 2 cada elemento
+
+let razasPerro=["salchicha", "chuhuahua", "beagle", "galgo"];
+console.log(razasPerro.map(elemento=>"Perro "+elemento));//Añade la palabra perro
+
+
+let numeros = [1,2,3,4,5];
+let fruta = ["manzana", "pera"];
+let razasAnimales=[
+  {animal : "perro", raza: "chihuahua"},
+  {animal : "perro", raza: "galgo"},
+  {animal : "gato", raza: "siames"},
+  {animal : "gato", raza: "egipcio"},
+ ];
+
+let arr1 = new Array(razasAnimales.filter(elemento=>(elemento.animal == "perro")));
+let arr2 = new Array(razasAnimales.filter(elemento=>(elemento.animal == "gato")));
+console.log(arr1);
+console.log(arr2);
+
+let arr3 = new Array(razasAnimales.filter(elemento=>(elemento.startsWith("gato")))); // sacar cuando no son objetos
+
+numeros.reduce((acumulado, actual) => acumulado+=actual);//Hace la operacion y devuelve un valor
+let frase = "Helado de" + fruta.reduce((acumulado, actual) => acumulado + " " + actual);
+
+
+numeros.join();//Une en un solo string un array
+
+numeros.sort((a,b) => a-b)//ordenar un array, modifica el array original
+//<0 si a<b, 0 si a==b, >0 si b>a
+function ordenarNumeros(a,b) {
+  let aux = (a<b) ?  -1 : 
+    (a==b) ?  0 :  1; 
+  return aux;
+}
+
+let ordenarNumeros2 = (a,b) =>{
+    let aux = (a<b) ?  -1 : 
+      (a==b) ?  0 :  1; 
+    return aux;
+}
+
+let ordenar = (a,b)=>a-b;
+
+
+
+numeros.reverse();//Le da la vuelta al array
+
+//Comparar matrices
+
+//Con == compara si son el mismo objeto no el contenido
+Array.isArray(razasAnimales);//Devuelve true si es una matriz y false si es un objeto
+
+//Copiar una matriz en otra
+let razasAnimales2 = Array.from(razasAnimales);
 */
-
-
-
-
-
-
-
