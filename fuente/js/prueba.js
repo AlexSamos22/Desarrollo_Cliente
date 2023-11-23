@@ -438,95 +438,500 @@
     }else{
       return (x * potenciaRecursiva(x,n-1));
     }
-  
   }
   console.log(potenciaRecursiva(2,5));
 
   let num = parseInt(prompt("Introduce un numero: "));
 
-  */
-
-  let numero = parseInt(prompt("Introduce un numero: "));
-  
-  console.log("-----Menu--------")
-  console.log("Opcion 1 pintar un diamante");
-  console.log("Opcion 2 pintar un cuadrado");
-  console.log("Opcion 3 pintar una piramide");
-  let opcion = parseInt(prompt("Elige una opcion: "));
 
 
-
-
-  switch (opcion) {
-  case 1:
-    let diamante = '';
-
-    for (let i = 0; i <= numero; i++) {
-      for (let j = numero - i; j > 0; j--) {
-        diamante += ' ';
-      }
-      diamante += '*';
-      if (i > 0) {
-        for (let k = 1; k <= 2 * i - 1; k++) {
-          diamante += ' ';
-        }
-        diamante += '*';
-      }
-      diamante += '\n';
-    }
-  
-    for (let i = numero - 1; i >= 0; i--) {
-      for (let j = numero - i; j > 0; j--) {
-        diamante += ' ';
-      }
-      diamante += '*';
-      if (i > 0) {
-        for (let k = 1; k <= 2 * i - 1; k++) {
-          diamante += ' ';
-        }
-        diamante += '*';
-      }
-      diamante += '\n';
-    }
-  console.log(diamante);
-    break;
-    case 2:
-      let cuadrado = "";
-      for (let  i = 1 ; i <= numero; i++) {
-        for (let j = 1; j <= numero; j++) {
-        if (i == 1 || i == numero || j == 1 || j == numero) {
-          cuadrado += "*";
-        }else{
-          cuadrado+= " ";
-        }  
-        }
-        cuadrado += "\n";
-      }
-      console.log(cuadrado);
-      break;
-
-    case 3:
-      let triangulo = '';
-      for (let i = 1; i <= numero; i++) {
-          for (let j = 1; j <= numero - i; j++) {
-            triangulo += ' ';
-          }
-          for (let k = 1; k <= 2 * i - 1; k++) {
-            if (i === 1 || i === numero || k === 1 || k === 2 * i - 1) {
-              triangulo += '*';
-            } else {
-              triangulo += ' ';
-            }
-          }
-          triangulo += '\n';
-        }
-      console.log(triangulo);
-      break;
-
-
-
-
-    default:
-      console.log("Opcion no valida");
-      break;
+//rest parameters 
+let total = 500;
+function restar(...numeros) {//los 3 puntos indican numeros introducidos infinitos
+  for(let aux of numeros){
+    total-=aux;
   }
+  return total;
+}
+function restarrecursivo(...numeros) {//los 3 puntos indican numeros introducidos infinitos
+  if (numeros.length == 1) {
+    return (total -= numeros.pop());
+  }
+  aux = numeros.pop//saca el ultimo elemento;
+  total -= aux;
+  return restarrecursivo(...numeros);
+}
+
+
+//funciones autoejecutable
+(function () {console.log("hola mundo")})();//Se ejecuta una vez y muere 
+(function (texto) {console.log(texto)})("hola mundo");
+
+//funciones anidadas
+
+function a() {
+  return function b(texto) {
+    console.log("Estoy dentro de " + texto);
+  }
+}
+
+let aux = a();
+a()();//se llaman con 2 parentesis 1 para cada funcion
+aux("jswjswisjisjwsiwjsiw");
+
+
+function creaCoche(marca) {
+  return function coche(modelo) {
+    console.log(marca + modelo);
+  }
+}
+
+creaCoche("BYD")("Atto 3");
+
+let coche = creaCoche("BYD");
+coche("Atto 3");
+
+//Scope, closure
+function crearUsuario() {
+  let saludo = "buen dia";
+  return function saluda(){
+    return saludo;
+  }
+}
+
+let saludo = "buena tarde";
+
+crearUsuario();
+
+
+//callback
+
+function operacion(num1, num2, op) {
+  return op(num1,num2);
+}
+
+function potencia(a,b) {
+  return (a**b);
+}
+
+let division = (a,b) => (a/b);
+
+console.log(operacion(10,5,potencia));
+console.log(operacion(10,5,division));
+
+//let potencia = (a,b) => (a**b);OPCION EN FLECHA
+
+
+//OBJETOS
+//Declarar un objeto
+let usuario = {
+  nombre: "Pepe",
+  profesion: "Fontanero",
+  medidas: {
+    altura: 180,
+    peso: 80
+  }
+}
+
+let coche={};
+coche.marca="Ford";
+coche.modelo="Mustang";
+
+function moto(marca, modelo) {
+  this.marca=marca;
+  this.modelo=modelo;
+}
+
+let moto1 = new moto("Yamaha", "Fazer");
+
+//parametro rest para crear objeto
+const {...parametros}={
+  direcion:"plaza de humilladero",
+  altura:"180",
+  cintura:"90"
+};
+console.log(parametros);
+
+//Asignar propiedades
+usuario.edad = 50;
+coche.year=2016;
+
+//Quitar propiedades
+
+delete(usuario.profesion);
+
+//Pasar valor como llave
+
+let llave = prompt("dame un valor");
+
+let cantidad = {
+  [llave]:5
+};
+
+////////////////////////////////////////////////
+
+function crearCoche(marca, modelo) {
+  return{
+    marca: marca,
+    modelo: modelo
+  }
+}
+
+let coche = crearCoche("Tesla", "MODEL3");
+console.log(coche);
+
+
+let crearCoche2 = (marca, modelo) => {
+  {marca, modelo}
+}
+
+let coche3 = crearCoche2("BYD", "HAN");
+
+
+//Comparar Objetos hacer bucle campo a campo
+
+
+
+//Copiar objetos
+let coche5 = Object.assign({}, coche3);//copia un objeto en otro, las propiedades anidadas las hace por referencia
+
+//Para arreglar eso se usa 
+let coche6 = structuredClone(usuario);
+
+//THIS accede a metodos y propiedades dentro del mismo objeto
+let usuario2 = {
+  nombre: "Pepe",
+  profesion: "Fontanero",
+  medidas: {
+    altura: 180,
+    peso: 80
+  },
+  ciudadesVisitadas:["guarroman", "pulpi", "papa"],
+  getName(){
+    return (this.nombre);
+  },
+  getAltura(){
+    return (this.medidas.altura)
+  },
+  getPeso(){
+    return(this.medidas.peso)
+  },
+  muestraCiudades(){
+    this.ciudadesVisitadas.forEach(
+      ciudad => console.log(ciudad)
+    );
+  }
+}
+
+function adios() {
+  return ("Adios");
+}
+
+usuario2.despidete = adios;
+usuario2.saluda();
+
+usuario2.muestraCiudades();
+
+let usuarios = {
+  nombre: "pepe",
+  profesion: "pintor",
+  direccion: {
+    calle: "pez n2",
+    ciudad: "chiquistan"
+  },
+  diAdios(){
+    console.log("adios");
+  }
+}
+
+//?. evita errores de undefined si la propiedad no existe
+console.log(usuarios.medidas?.pecho);
+console.log(usuarios.medidas ? usuarios.medidad.pecho : undefined);
+console.log(usuarios.medidas && usuarios.medidas.pecho);
+console.log(usuarios.diHola?.());//evita el error de no existe
+
+
+
+
+let precios = {
+  zapatillas: 50,
+  sudadera: 80,
+  pantalon: 60
+}
+//Toma un string y lo pasa a objeto
+let aux = Object.fromEntries(
+  //convierte un objeto a string, propiedad de 0 deja las llaves sin modificar, y la de 1 le resta 10 a cada valor de las llaves
+  Object.entries(precios).map(propiedad=>[propiedad[0], propiedad[1]-10])
+)
+
+
+//JSON
+const texto=`{
+  "name": "mi-objeto",
+  "version": "1.0.0"
+}`;
+
+let precios = {
+  zapatillas: 50,
+  sudadera: 80,
+  pantalon: 60
+}
+
+//Convierte texto a objeto
+JSON.parse(texto);
+
+//Convertur de objeto a cadena
+JSON.stringify(precios);
+
+
+//FECHAS
+let ahora = new Date();
+
+
+//Metodos de sobreescritura, se escribe el mismo metodo en otro objeto
+let animales = {
+  vivo : true,
+  desplazate(){
+    return "voy andando";
+  }
+}
+
+let pulga = {
+  salta: true,
+  desplazate(){
+    return "voy saltando";
+  }
+}
+
+let ciempies = {
+  desplazate(){
+    return "voy con mil pies";
+  }
+}
+Object.setPrototypeOf(pulga, animales); //Pulga hereda los metodos y propiedades de animales y mantiene los suyos, con mismos metodos tiene preferencia la que tiene definida dentro
+
+
+//GET AND SET
+
+let animales = {
+  vivo : true,
+  desplazate(){
+    return "voy andando";
+  },
+  get estado(){
+    return this.vivo;
+  },
+  set estado(nuevoEstado){
+    this.vivo = nuevoEstado;
+  }
+}
+
+console.log(animales.estado);
+
+
+//Iterar sobre objetos
+
+let persona = {
+  nombre: "",
+  apellidos: "",
+  acceso:""
+}
+
+let conserje={};
+let admin = {};
+
+Object.setPrototypeOf(conserje, persona);
+Object.setPrototypeOf(admin, persona);
+conserje.acceso = "Basico";
+admin.acceso = "Completo";
+admin.nombre = "perico";
+admin.apellidos = "perez gomez";
+
+for (let valor in admin){
+  console.log(valor);
+}
+
+
+//CLASES
+class Usuario{
+  constructor(nombre){
+    this.nombre = nombre;
+  }
+
+  saluda(){
+    console.log(this.nombre + " te saluda");
+  }
+}
+
+let usuario1 = new Usuario("Procopio");
+
+usuario1.saluda();
+
+
+///////////////////////////////////////////////////
+//clase como expresion
+
+let perro = class{
+  ladrar(){
+    console.log("guau");
+  }
+
+  morder(){
+    console.log("mordiendo");
+  }
+}
+
+let a = new perro;
+
+a.ladrar;
+
+new perro().ladrar(); //No se puede instanciar
+
+
+/////////
+//losing this
+ class Boton{
+  constructor(texto){
+    this.textoBoton = texto;
+  }
+
+  click(){
+    console.log("has pinchado en el boton" + this.textoBoton) //dara undefined en el this
+  }
+
+  pinchar =()=>{console.log("has pinchado en el boton" + this.textoBoton);} //Se arregla con una funcion de flecha
+ }
+
+ let miBoton = new Boton("Esto es un boton");
+ setTimeout(miBoton.click, 2000);//Ejecuta una accion cada cierto tiempo
+ setTimeout(miBoton.pinchar, 2000);
+
+
+///////////////////////////////
+//Herencia de clases / extension
+class animal{
+  constructor(nombre){
+    this.nombre = nombre;
+  }
+
+  corre(velocidad){
+    this.velocidad = velocidad;
+    console.log(`voy a ${velocidad} km/h`)
+  }
+
+  para(){
+    this.velocidad = 0;
+    console.log("estoy parado");
+  }
+}
+
+class pulga extends animal{
+  salta(distancia){
+    this.distancia = distancia;
+  }
+
+  corre(velocidad){
+    this.velocidad = velocidad/1000;
+    console.log(`voy a ${velocidad} km/h, dentro de pulga`)
+  }
+
+  esconderse(){
+    //super.para(); //Para llamar al metodo del padre
+
+    //setTimeout(function(){super.para()}, 2000);
+
+    setTimeout(()=>{
+      super.para();
+    }, 2000) //si esta dentro de una funcion hay que hacerla en flecha 
+    console.log("Estoy escondido");
+  }
+}
+
+let pulgilla = new pulga("chinchosa");
+
+pulgilla.corre(5);
+
+////////////////////////
+//Sobreescribir metodos
+pulgilla.corre(5);//Tiene preferencia los metodos de la propia clase antes que los metodos de la padre
+
+
+//
+///Sobreescribir constructor
+class animal{
+  #peso;//Propiedad protegida, no se puede usar fuera de la clase, para acceder a ella hay que hacer un set o un get
+  constructor(nombre, peso){
+    this.nombre = nombre;
+    this._velocidad = 0; //Propiedad Privada
+    this.#peso = peso;
+  }
+
+  static comparaTamayo(animal1, animal2){//Metodo estatico
+    if(animal1.tamayo > animal2.tamayo){
+      return "animal1 es mas grande";
+    }else{
+      return "animal2 es mas grande";
+    }
+  }
+
+  setPeso(peso){
+    this.#peso = peso;
+  }
+
+  set ajustarPeso(aus){
+    this.#peso = aux:
+  }
+
+  getPeso(){
+    return this.#peso;
+  }
+
+  diHola(){
+    return "Hola";
+  }
+}
+
+
+class perro extends Animal{
+  constructor(nombre, tamayo){
+    super(nombre);
+    this.tamayo = tamayo;
+  }
+
+  diAlgo(){
+    return "guau, guau";
+  }
+}
+perro.ajustarpeso = 2;
+
+//Metodos estaticos
+class conejo extends animal{
+
+}
+
+animal.comparaTamayo(perro, conejo);//Llamada al metodo estatico
+
+//Metodo instaceOf(); 
+let a = new animal("fufu", 20)
+console.log(a instanceof animal);//Devuelve si a es una isntancia de animal
+
+//Mixins para que permita heredar de mas de una clase a la vez
+
+let miMixin = (animal) => class extends Animal{
+  diAdios(){
+    return "El animal se va";
+  }
+}
+class bicicleta extends miMixin(animal){
+  constructor(marca,tipo){
+    this.marca = marca;
+    this.tipo = tipo;
+  }
+}
+ */
+
+
+
+
+
+
