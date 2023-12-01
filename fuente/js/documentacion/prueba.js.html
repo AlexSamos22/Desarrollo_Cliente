@@ -1,4 +1,32 @@
-  /*
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: prueba.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: prueba.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>  /*
   console.log("Esto es unn mensaje de prueba");
   let numero = 5;
 
@@ -77,8 +105,8 @@
   let c = 2;
   let d = 2;
 
-  console.log(a>b, c<b, c==d, a!=b);
-  console.log(cadena1<cadena2);
+  console.log(a>b, c&lt;b, c==d, a!=b);
+  console.log(cadena1&lt;cadena2);
   console.log('4'>cadena1); 
   console.log(0==false);
   console.log(""==false);
@@ -101,8 +129,8 @@
   //OR ||
   console.log(a || b)
 
-  //AND &&
-  console.log(a && c);
+  //AND &amp;&amp;
+  console.log(a &amp;&amp; c);
 
   //?? devuelve el primer valor que no es nulo puede ser 0
   console.log(a ?? 160);
@@ -139,7 +167,7 @@
   console.log("i vale: " .i)
   }while(i>0);
 
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i &lt; 4; i++) {
     console.log(i);
   }
 
@@ -147,7 +175,7 @@
 
   let num = 23
   let array;
-  for(let i = 0; i<num; i++){
+  for(let i = 0; i&lt;num; i++){
       if(num%2 == 0){
           array.push(i);
       }
@@ -193,7 +221,7 @@
 
   let saluda= (quien) => `hola, ${quien}`;
   let edad = 16;
-  let irAlaCarcel = (edad<18) ? 
+  let irAlaCarcel = (edad&lt;18) ? 
     () => console.log("no va a la carcel") : 
     () => console.log("vas a la carcel");
 
@@ -362,7 +390,7 @@
 
 
   almacen.filter(elemento=>elemento.existencias>4);//Devuekve un elemento que cumple con los requisitos
-  almacen.filter(elemento=>(elemento.nombre=="manzana") && (elemento.existencias>4));
+  almacen.filter(elemento=>(elemento.nombre=="manzana") &amp;&amp; (elemento.existencias>4));
 
   let numeros =[5,1,2,11,22];
 
@@ -395,15 +423,15 @@
   numeros.join();//Une en un solo string un array
 
   numeros.sort((a,b) => a-b)//ordenar un array, modifica el array original
-  //<0 si a<b, 0 si a==b, >0 si b>a
+  //&lt;0 si a&lt;b, 0 si a==b, >0 si b>a
   function ordenarNumeros(a,b) {
-    let aux = (a<b) ?  -1 : 
+    let aux = (a&lt;b) ?  -1 : 
       (a==b) ?  0 :  1; 
     return aux;
   }
 
   let ordenarNumeros2 = (a,b) =>{
-      let aux = (a<b) ?  -1 : 
+      let aux = (a&lt;b) ?  -1 : 
         (a==b) ?  0 :  1; 
       return aux;
   }
@@ -426,7 +454,7 @@
   //Recursividad-----------------------------------------------------------------
   function potencia(x,n) {
     let potencia = 1;
-    for (let i = 0; i < n; i++) {
+    for (let i = 0; i &lt; n; i++) {
       potencia *= x;
     }
     return potencia;
@@ -647,7 +675,7 @@ let usuarios = {
 //?. evita errores de undefined si la propiedad no existe
 console.log(usuarios.medidas?.pecho);
 console.log(usuarios.medidas ? usuarios.medidad.pecho : undefined);
-console.log(usuarios.medidas && usuarios.medidas.pecho);
+console.log(usuarios.medidas &amp;&amp; usuarios.medidas.pecho);
 console.log(usuarios.diHola?.());//evita el error de no existe
 
 
@@ -945,15 +973,15 @@ class tablero{
 
   generarTablero(){
       let contador = 0;
-      for (let i = 1; i < this.filas * this.columnas; i++){
+      for (let i = 1; i &lt; this.filas * this.columnas; i++){
           this.numeros.push(i);
       }
       this.numeros.push(" ");
       this.numeros.sort(() => Math.random() - 0.5);
 
-      for (let  i = 0; i < this.filas; i++) {
+      for (let  i = 0; i &lt; this.filas; i++) {
           this.tablero[i] = [];
-          for (let j = 0; j < this.columnas; j++) {
+          for (let j = 0; j &lt; this.columnas; j++) {
                   this.tablero[i][j] = this.numeros[contador];
                   contador ++;
           }   
@@ -969,7 +997,7 @@ class tablero{
           let filaEspacioBlanco = espacioBlanco.fila;
           let columnaEspacioBlanco = espacioBlanco.columna;
   
-          for(let i = 0; i< numerosMovibles.length; i++){
+          for(let i = 0; i&lt; numerosMovibles.length; i++){
               listaNumeros += numerosMovibles[i] + " ";
           }
           
@@ -977,7 +1005,7 @@ class tablero{
           
           while(!encontrado){
               let num = parseInt(prompt("Que numero quiere mover: "));
-              for(let i = 0; i< numerosMovibles.length; i++){
+              for(let i = 0; i&lt; numerosMovibles.length; i++){
                   if(num == numerosMovibles[i]){
                       let encontrado = true;
                       break;
@@ -986,8 +1014,8 @@ class tablero{
           }
           
           
-          for (let i = 0; i < this.filas; i++) {
-              for (let j = 0; j < this.columnas; j++) {
+          for (let i = 0; i &lt; this.filas; i++) {
+              for (let j = 0; j &lt; this.columnas; j++) {
                   if (this.tablero[i][j] === num) {
                       mover = {fila: i, columna: j};
                   }
@@ -1008,8 +1036,8 @@ class tablero{
           
 
   encontrarEspacioBlanco() {
-      for (let i = 0; i < this.filas; i++) {
-          for (let j = 0; j < this.columnas; j++) {
+      for (let i = 0; i &lt; this.filas; i++) {
+          for (let j = 0; j &lt; this.columnas; j++) {
               if (this.tablero[i][j] === " ") {
                   this.espacioBlanco = { fila: i, columna: j };
                   return this.espacioBlanco;
@@ -1042,9 +1070,9 @@ class tablero{
         let contador = 1;
         const celdasTotales = this.filas * this.columnas;
   
-      for (let i = 0; i < this.filas; i++) {
-          for (let j = 0; j < this.columnas; j++) {
-              if (contador !== celdasTotales && this.tablero[i][j] != contador++) {
+      for (let i = 0; i &lt; this.filas; i++) {
+          for (let j = 0; j &lt; this.columnas; j++) {
+              if (contador !== celdasTotales &amp;&amp; this.tablero[i][j] != contador++) {
                   return false; 
               }
           }
@@ -1075,8 +1103,8 @@ class tablero{
    */
   estadoDelJuego(){
       let tablero = "";
-      for (let i = 0; i < this.filas; i++) {
-          for (let j = 0; j < this.columnas; j++) {
+      for (let i = 0; i &lt; this.filas; i++) {
+          for (let j = 0; j &lt; this.columnas; j++) {
               tablero += "| " + this.tablero[i][j] + " | ";
           }
           console.log(tablero);
@@ -1103,3 +1131,26 @@ juego.estadisticas();
 
 
 
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Dec 01 2023 20:01:12 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

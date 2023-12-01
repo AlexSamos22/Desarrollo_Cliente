@@ -57,6 +57,34 @@ class Vehiculo{
         this.velocidad -= nuevaVelocidad;
         return console.log("La nueva velocidad del vehiculo es: " + this.velocidad + " Km/h");
     }
+
+    static comparaVelocidad(vehiculo1, vehiculo2){
+        if(vehiculo1.velocidadMax > vehiculo2.velocidadMax){
+          return vehiculo1.tipoVehiculo + " tiene mas velocidad maxima que " + vehiculo2.tipoVehiculo; 
+        }else{
+          return vehiculo2.tipoVehiculo + " tiene mas velocidad maxima que " + vehiculo1.tipoVehiculo; 
+        }
+    }
+
+    static comparaPoder(vehiculo1, vehiculo2){
+        if(vehiculo1.velocidadMax > vehiculo2.velocidadMax){
+          return vehiculo1.tipoVehiculo + " tiene mas poder que " + vehiculo2.tipoVehiculo; 
+        }else{
+          return vehiculo2.tipoVehiculo + " tiene mas poder que " + vehiculo1.tipoVehiculo; 
+        }
+    }
+
+    #numeroRudas(vehiculo){
+        if (vehiculo.tipoVehiculo == "moto") {
+            return "Tiene 2 ruedas";
+        }else{
+            return "Tiene 4 ruedas;"
+        }
+    }
+
+    getRuedas(vehiculo){
+        return this.#numeroRudas(vehiculo);
+    }
 }
 
 class Camion extends Vehiculo{
@@ -115,23 +143,22 @@ class Caravana extends Vehiculo{
 }
 
 let BMW = new Coche("maquinas", "X3", 2003, "combustion", 187.9, 4.7, 200, "B");
+let YAMAHA = new Moto("maquinas", "MT", 2006, "combustion", 160, 2.3, 180, "B");
 
-BMW.claseVehiculo();
-BMW.encenderMotor();
-BMW.rellenarDeposito(60);
-BMW.aumentarVelocidad(80);
-BMW.disminuirVelocidad(30);
-BMW.apagarMotor();
 
+console.log(Vehiculo.comparaVelocidad(BMW, YAMAHA));
+console.log(Vehiculo.comparaPoder(BMW, YAMAHA));
+console.log(getRuedas(BMW));
 //EJER2
 
 class Animal {
-    constructor(grupo, nombre, edad, formaDeMoverse, habitat) {
+    constructor(grupo, nombre, edad, formaDeMoverse, habitat, peso) {
         this.grupo = grupo;
         this.nombre = nombre;
         this.edad = edad;
         this.formaDeMoverse = formaDeMoverse;
         this.habitat = habitat;
+        this.peso = peso;
     }
 
     dormir() {
@@ -149,27 +176,40 @@ class Animal {
     detenerse() {
         console.log(`${this.nombre} se detuvo.`);
     }
+
+    static compararPeso(animal1, animal2){
+        if(animal1.peso > animal2.peso){
+            return animal1.nombre + " pesa mas que " + animal2.peso; 
+          }else{
+            return animal2.peso + " pesa mas que " + animal1.peso; 
+          }
+    }
+
+    #setPeso(peso){
+        this.peso = peso;
+    }
+
     }
   
 class Mamifero extends Animal {
-constructor(nombre, edad, formaDeMoverse, habitat, numeroDePatas, tieneCola) {
-    super('mamífero', nombre, edad, formaDeMoverse, habitat);
+constructor(nombre, edad, formaDeMoverse, habitat, peso, numeroDePatas, tieneCola) {
+    super('mamífero', nombre, edad, formaDeMoverse, habitat, peso);
     this.numeroDePatas = numeroDePatas;
     this.tieneCola = tieneCola;
 }
 }
 
 class Reptil extends Animal {
-    constructor(nombre, edad, formaDeMoverse, habitat, numeroDePatas, tieneCola) {
-        super('reptil', nombre, edad, formaDeMoverse, habitat);
+    constructor(nombre, edad, formaDeMoverse, habitat, peso, numeroDePatas, tieneCola) {
+        super('reptil', nombre, edad, formaDeMoverse, habitat, peso);
         this.numeroDePatas = numeroDePatas;
         this.tieneCola = tieneCola;
     }
 }
 
 class Pez extends Animal {
-    constructor(nombre, edad, formaDeMoverse, hábitat, numeroDeAletas, tieneCola) {
-        super('pez', nombre, edad, formaDeMoverse, hábitat);
+    constructor(nombre, edad, formaDeMoverse, hábitat, peso, numeroDeAletas, tieneCola) {
+        super('pez', nombre, edad, formaDeMoverse, hábitat, peso);
         this.numeroDeAletas = numeroDeAletas;
         this.tieneCola = tieneCola;
     }
@@ -188,128 +228,103 @@ class tablero{
     constructor(filas, columnas){
         this.filas = filas;
         this.columnas = columnas;
-        this.espacioBlanco;
+        this.espacioBlanco = 1;
         this.tablero = [];
-        this.numeros = [];
         this.movimientos = 0;
         this.inicioJuego = null;
         this.finJuego = null;
     }
   
-    
-    /**
-     *Funcion que genera un tablero y lo desordena
-     *
-     * @memberof tablero
-     */
+  
     generarTablero(){
-        let contador = 0;
-        for (let i = 1; i < this.filas * this.columnas; i++){
-            this.numeros.push(i);
-        }
-        this.numeros.push(" ");
-        this.numeros.sort(() => Math.random() - 0.5);
-
-        for (let  i = 0; i < this.filas; i++) {
+        let contador = 1;
+        for (let i = 0; i < this.filas; i++) {
             this.tablero[i] = [];
             for (let j = 0; j < this.columnas; j++) {
-                    this.tablero[i][j] = this.numeros[contador];
-                    contador ++;
-            }   
+                if (contador <= (this.filas * this.columnas) - this.espacioBlanco) {
+                    this.tablero[i][j] = contador ++;
+                }else{
+                    this.tablero[i][j] = " ";
+                }
+            }
         }
     }
   
-    movimiento() {
-            let numerosMovibles = this.movimientoValido();
-            let listaNumeros = " ";
-            let mover;
-            let num;
-            let encontrado = false;
-            let espacioBlanco = this.espacioBlanco;
-            let filaEspacioBlanco = espacioBlanco.fila;
-            let columnaEspacioBlanco = espacioBlanco.columna;
+    desordenarTablero(){
+        for (let i = this.filas - 1; i >= 0 ;i--) {
+            for (let j = this.columnas - 1; j >= 0; j--) {
+                let randomI = Math.floor(Math.random() * (i + 1));
+                let randomJ = Math.floor(Math.random() * (j + 1));
+                let valorOriginal = this.tablero[i][j];
+                let valorRandom = this.tablero[randomI][randomJ];
+  
+                this.tablero[i][j] = valorRandom;
+                this.tablero[randomI][randomJ] = valorOriginal;
+            }
+        }
+  
+        this.inicioJuego = new Date();
+    }
+  
+    movimiento(fila, columna) {
+        let espacioBlanco = this.encontrarEspacioBlanco();
     
-            for(let i = 0; i< numerosMovibles.length; i++){
-                listaNumeros += numerosMovibles[i] + " ";
-            }
-            
-            console.log("Los numeros que se pueden mover son: " + listaNumeros);
-            
-            while(!encontrado){
-                num = parseInt(prompt("Que numero quiere mover: "));
-                for(let i = 0; i< numerosMovibles.length; i++){
-                    if(num == numerosMovibles[i]){
-                        encontrado = true;
-                        break;
-                    }
-            }
-            }
-            
-            
-            for (let i = 0; i < this.filas; i++) {
-                for (let j = 0; j < this.columnas; j++) {
-                    if (this.tablero[i][j] === num) {
-                        mover = {fila: i, columna: j};
-                    }
-                }
-            }
-            
-            
-            let posNumero = this.tablero[mover.fila][mover.columna];
+        if (!espacioBlanco) {
+            return console.log("No se encontró el espacio en blanco");
+        }
     
-            this.tablero[mover.fila][mover.columna] = " ";
+        const filaEspacioBlanco = espacioBlanco.fila;
+        const columnaEspacioBlanco = espacioBlanco.columna;
+    
+        if (this.movimientoValido(fila, columna)) {
+            let posNumero = this.tablero[fila][columna];
+    
+            this.tablero[fila][columna] = " ";
             this.tablero[filaEspacioBlanco][columnaEspacioBlanco] = posNumero;
     
             this.movimientos++;
-            this.espacioBlanco = {fila: mover.fila, columna: mover.columna};
-            this.verificarFinJuego(); 
-        
-    }
-            
-
-    encontrarEspacioBlanco() {
+            this.verificarFinJuego(); // Verificar si se ha ganado después de cada movimiento
+        } else {
+            console.log("Movimiento no válido");
+        }
+  }
+  
+    encontrarEspacioBlanco(){
+       let espacioBlanco = null;
         for (let i = 0; i < this.filas; i++) {
-            for (let j = 0; j < this.columnas; j++) {
-                if (this.tablero[i][j] === " ") {
-                    this.espacioBlanco = { fila: i, columna: j };
-                    return this.espacioBlanco;
-                }
+        for (let j = 0; j < this.columnas; j++) {
+            if (this.tablero[i][j] === " ") {
+                espacioBlanco = { fila: i, columna: j };
+                break;
             }
         }
     }
-
-   movimientoValido() {
-        let espacioBlanco = this.espacioBlanco;
-        let movimientosPosibles = [];
-
-            if((espacioBlanco.fila - 1) != -1){
-                movimientosPosibles.push(this.tablero[espacioBlanco.fila -1][espacioBlanco.columna]);
-            }
-            if((espacioBlanco.fila + 1) != (this.filas)){
-                movimientosPosibles.push(this.tablero[espacioBlanco.fila +1][espacioBlanco.columna]);
-            }
-            if((espacioBlanco.columna - 1) != -1){
-                movimientosPosibles.push(this.tablero[espacioBlanco.fila][espacioBlanco.columna - 1]);
-            }
-            if((espacioBlanco.columna + 1) != (this.columnas)){
-                movimientosPosibles.push(this.tablero[espacioBlanco.fila][espacioBlanco.columna + 1]);
-            }
-        return movimientosPosibles;
-    }
+    return espacioBlanco;
+  }
+    movimientoValido(fila, columna){
+         let espacioBlanco = this.encontrarEspacioBlanco();
+         let filaEspacioBlanco = espacioBlanco.fila;
+         let columnaEspacioBlanco = espacioBlanco.columna;
   
+     return (
+        (fila === espacioBlanco.fila - 1 && columna === espacioBlanco.columna) ||
+        (fila === espacioBlanco.fila + 1 && columna === espacioBlanco.columna) ||
+        (fila === espacioBlanco.fila && columna === espacioBlanco.columna - 1) ||
+        (fila === espacioBlanco.fila && columna === espacioBlanco.columna + 1)
+    );
+  }
   
     verificarFinJuego(){
-        let contador = 1;
+          let contador = 1;
+          const celdasTotales = this.filas * this.columnas;
+    
         for (let i = 0; i < this.filas; i++) {
             for (let j = 0; j < this.columnas; j++) {
-                if(contador != (this.filas * this.columnas)){
-                    if(this.tablero[i][j] != contador){
-                        return false;
-                    }else{
-                        contador++;
-                    }
+                if (contador !== celdasTotales && this.tablero[i][j] != contador++) {
+                    return false; 
                 }
             }
+            contador++;
         }
     
         this.finJuego = new Date();
@@ -328,29 +343,21 @@ class tablero{
   
         return console.log("Has tenido: " + movimientos + " movimientos y has tardado en acabar " + tiempoJuego + " minutos");
     }
-
-    estadoDelJuego(){
-        let tablero = "";
-        for (let i = 0; i < this.filas; i++) {
-            for (let j = 0; j < this.columnas; j++) {
-                tablero += "| " + this.tablero[i][j] + " | ";
-            }
-            console.log(tablero);
-            tablero = "";
-        }
-    }
-    
-
-
   }
   
-  let juego = new tablero(3, 3); 
-  juego.generarTablero();
-  juego.encontrarEspacioBlanco();
+  const juego = new tablero(3, 3); 
+  
 
+  juego.generarTablero();
+  juego.desordenarTablero();
+  
+
+  console.log(juego.tablero);
   while(!juego.verificarFinJuego()){
-    juego.estadoDelJuego();
-    juego.movimiento();
+    console.log(juego.tablero);
+    let fila = parseInt(prompt("inserte la fila para mover: "));
+    let col = parseInt(prompt("Inserte la columna para mover: "));
+    juego.movimiento(fila, col); 
   }
   
   juego.estadisticas(); 
@@ -376,7 +383,7 @@ class TresEnRaya {
     }
 
     hacerMovimiento(fila, columna) {
-        if (this.tablero[fila][columna] == ' ') {
+        if (this.tablero[fila][columna] === ' ') {
             this.tablero[fila][columna] = this.turnoActual;
             this.movimientos++;
             this.verificarGanador(fila, columna);
@@ -387,44 +394,44 @@ class TresEnRaya {
     }
 
     cambiarTurno() {
-        this.turnoActual = this.turnoActual == 'X' ? 'O' : 'X';
+        this.turnoActual = (this.turnoActual == 'X' ? 'O' : 'X');
     }
 
     verificarGanador(fila, columna) {
-        if (
+        if (//Verificar que los movimientos seas mayores a 3
             this.verificarFila(fila) ||
             this.verificarColumna(columna) ||
             this.verificarDiagonales() ||
             this.verificarAntiDiagonales()
-        ) {
+            ) {
             this.ganador = this.turnoActual;
-        } else if (this.movimientos == 9) {
+        } else if (this.movimientos === 9) {
             this.ganador = 'empate';
         }
     }
 
     verificarFila(fila) {
-        return this.tablero[fila][0] == this.turnoActual &&
-               this.tablero[fila][1] == this.turnoActual &&
-               this.tablero[fila][2] == this.turnoActual;
+        return this.tablero[fila][0] === this.turnoActual &&
+               this.tablero[fila][1] === this.turnoActual &&
+               this.tablero[fila][2] === this.turnoActual;
     }
 
     verificarColumna(columna) {
-        return this.tablero[0][columna] == this.turnoActual &&
-               this.tablero[1][columna] == this.turnoActual &&
-               this.tablero[2][columna] == this.turnoActual;
+        return this.tablero[0][columna] === this.turnoActual &&
+               this.tablero[1][columna] === this.turnoActual &&
+               this.tablero[2][columna] === this.turnoActual;
     }
 
     verificarDiagonales() {
-        return this.tablero[0][0] == this.turnoActual &&
-               this.tablero[1][1] == this.turnoActual &&
-               this.tablero[2][2] == this.turnoActual;
+        return this.tablero[0][0] === this.turnoActual &&
+               this.tablero[1][1] === this.turnoActual &&
+               this.tablero[2][2] === this.turnoActual;
     }
 
     verificarAntiDiagonales() {
-        return this.tablero[0][2] == this.turnoActual &&
-               this.tablero[1][1] == this.turnoActual &&
-               this.tablero[2][0] == this.turnoActual;
+        return this.tablero[0][2] === this.turnoActual &&
+               this.tablero[1][1] === this.turnoActual &&
+               this.tablero[2][0] === this.turnoActual;
     }
 
     obtenerGanador() {
@@ -436,16 +443,16 @@ class TresEnRaya {
 let EnRalla = new TresEnRaya();
 
 
-EnRalla.hacerMovimiento(0, 0);
-EnRalla.hacerMovimiento(1, 1);
-EnRalla.hacerMovimiento(0, 1);
-EnRalla.hacerMovimiento(1, 0);
-EnRalla.hacerMovimiento(2, 2);
-EnRalla.hacerMovimiento(1, 2);
+juego.hacerMovimiento(0, 0);
+juego.hacerMovimiento(1, 1);
+juego.hacerMovimiento(0, 1);
+juego.hacerMovimiento(1, 0);
+juego.hacerMovimiento(2, 2);
+juego.hacerMovimiento(1, 2);
 
-EnRalla.imprimirTablero();
+juego.imprimirTablero();
 
-let ganador = juego.obtenerGanador();
+const ganador = juego.obtenerGanador();
 if (ganador === 'empate') {
     console.log('¡Es un empate!');
 } else if (ganador) {
