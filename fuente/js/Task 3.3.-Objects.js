@@ -1,281 +1,246 @@
-//ejer1
-let user = {};
-user.name = "Jhon";
-user.surname = "Smith";
-user.name = "Pete";
-delete user.name;
-let obj = {}
-function isEmpty(obj) {
-  let longitud = 0;
+// ejer1
+let usuario = {};
+usuario.nombre = "Jhon";
+usuario.apellido = "Smith";
+usuario.nombre = "Pete";
+delete usuario.nombre;
 
-
-  for (let elemento in obj) {
-    longitud ++;
+let objeto = {};
+function estaVacio(obj) {
+  for (let key in obj) {
+    return false;
   }
-  return (longitud == 0)? true : false;
+  return true;
 }
+console.log(estaVacio(objeto));
 
-
-console.log(isEmpty(obj));
-
-//ejer2
-let salaries = {
-    John: 100,
-    Ann: 160,
-    Pete: 130
-    }
-  
-  
-let sumaSalarios = 0;
-let valores = Object.values(salaries);
-for (let elemento of valores){
-        sumaSalarios += parseInt(elemento);
-}  
-salaries.suma = sumaSalarios;
-console.log(salaries);
-
-//ejer3
-let salaries = {
-    John: 100,
-    Ann: 160,
-    Pete: 130
-}
-  
-  
-function multiplyNumeric(obj) {
-let aux = Object.fromEntries(
-    Object.entries(obj).map(elemento => [elemento[0], elemento[1]*2])
-)
-return aux;
-}
-
-let nuevosSalatios = multiplyNumeric(salaries);
-console.log(nuevosSalatios);
-
-//ejer5
-let calculator = {
-    a: 0,
-    b: 0,
-    read: function(){
-        this.a = parseInt(prompt('Inserte el primer numero: '));
-        this.b = parseInt(prompt('Inserte el segundo numero: '));
-    },
-    sum(){
-        return this.a + this.b;
-    },
-    mul(){
-        return this.a * this.b;
-    }
+// ejer2
+let salarios = {
+  John: 100,
+  Ann: 160,
+  Pete: 130
 };
 
-calculator.read();
-console.log(calculator.sum());
-console.log(calculator.mul());
+let sumaSalarios = Object.values(salarios).reduce((total, salario) => total + salario, 0);
+salarios.suma = sumaSalarios;
+console.log(salarios);
 
-//ejer6
-let frutas={
-    "manzanas golden": 25,
-     "manzanas fuji": 20,
-    "pera conferencia": 17,
-    "pera ercolina": 12,
-}
+// ejer3
+let salarios2 = {
+  John: 100,
+  Ann: 160,
+  Pete: 130
+};
 
-function kilosTotales(obj) {
-    let sumaTotal = 0;
-
-    let valoresFrutas = Object.values(obj);
-    if (valoresFrutas.length == 0) {
-      return console.log("El objeto esta vacio");
-    }else{
-      for (let elemento of valoresFrutas) {
-        sumaTotal += elemento;
-      }
-       return console.log(sumaTotal);
-    }
-}
-kilosTotales(frutas);
-
-function kilosTotales(obj) {
-    let sumaTotal = 0;
-  
-  
-      for (let [clave, valor] of Object.entries(obj)) {
-        sumaTotal += valor;
-      }
-      if (sumaTotal == 0) {
-        return console.log("El objeto esta vacio");
-      }else{
-        return console.log(sumaTotal);
-      }
-}
-  
-kilosTotales(frutas);
-
-//ejer7
-function kilosTotales(obj) {
-  let frutasKilos = {
-    manzanas: 0,
-    peras: 0
-  };
-  
-  
+function multiplicarNumericos(obj) {
+  let resultado = {};
   for (let key in obj) {
-    if (key.startsWith("manzana")) {
-      frutasKilos.manzanas += obj[key];
-    }else if(key.startsWith("pera")){
-      frutasKilos.peras += obj[key];
-    }
+    resultado[key] = typeof obj[key] === 'number' ? obj[key] * 2 : obj[key];
   }
-  
-    if (Object.keys(obj).length == 0) {
-      return console.log("El objeto esta vacio");
-    }else{
-      return frutasKilos;
-    }
+  return resultado;
+}
+let nuevosSalarios = multiplicarNumericos(salarios2);
+console.log(nuevosSalarios);
+
+// ejer5
+let calculadora = {
+  a: 0,
+  b: 0,
+  leer: function() {
+    this.a = parseInt(prompt('Inserta el primer número: ')) || 0;
+    this.b = parseInt(prompt('Inserta el segundo número: ')) || 0;
+  },
+  suma() {
+    return this.a + this.b;
+  },
+  multiplicacion() {
+    return this.a * this.b;
   }
-  
-  let frutas={
+};
+
+calculadora.leer();
+console.log(calculadora.suma());
+console.log(calculadora.multiplicacion());
+
+// ejer6
+let frutas = {
   "manzanas golden": 25,
   "manzanas fuji": 20,
   "pera conferencia": 17,
-  "pera ercolina": 12,
+  "pera ercolina": 12
+};
+
+function calcularTotalKilos(frutas) {
+  let totalKilos = 0;
+  for (let key in frutas) {
+    totalKilos += frutas[key];
   }
-  
-  let obj = kilosTotales(frutas);
-  
-  console.log(obj);
-  
-//ejer8
-let ladder = {
-  step: 0,
-  up() {
-  this.step++;
-  return this;
+  return totalKilos;
+}
+
+console.log(calcularTotalKilos(frutas));
+
+// ejer7
+function calcularKilosPorTipo(frutas) {
+  let kilosPorTipo = {
+    manzanas: 0,
+    peras: 0
+  };
+
+  for (let key in frutas) {
+    if (key.startsWith("manzana")) {
+      kilosPorTipo.manzanas += frutas[key];
+    } else if (key.startsWith("pera")) {
+      kilosPorTipo.peras += frutas[key];
+    }
+  }
+  return kilosPorTipo;
+}
+
+let frutas3 = {
+  "manzanas golden": 25,
+  "manzanas fuji": 20,
+  "pera conferencia": 17,
+  "pera ercolina": 12
+};
+
+let resultado = calcularKilosPorTipo(frutas3);
+console.log(resultado);
+
+// ejer8
+let escalera = {
+  paso: 0,
+  subir() {
+    this.paso++;
+    return this;
   },
-  down() {
-  this.step--;
-  return this; // el this hace referencia al bloque de contenido al que pertenece, por ende al estar dentro del objeto, hace referencia al objeto
+  bajar() {
+    this.paso--;
+    return this;
   },
-  showStep: function() { // shows the current step
-  alert( this.step );
-  return this;
+  mostrarPaso() {
+    console.log(this.paso);
+    return this;
   }
 };
-ladder.up().up().down().showStep().down().showStep();
 
-//ejer9
-let frutas={
+escalera.subir().subir().bajar().mostrarPaso().bajar().mostrarPaso();
+
+// ejer9
+let frutas4 = {
   nombre: "manzana",
   kilos: 200,
-  sell(){
-    let compra = parseInt(prompt("Cuantos kilos quieres: ")) || 0;
+  vender() {
+    let cantidadVenta = parseInt(prompt("¿Cuántos kilos deseas comprar?")) || 0;
 
-
-    if (compra > this.kilos) {
-      console.log("No hay suficientes kilos");
-    }else{
-      console.log("Venta efectuada");
-      this.kilos= this.kilos - compra;
+    if (cantidadVenta > this.kilos) {
+      console.log("No hay suficientes kilos.");
+    } else {
+      console.log("Venta realizada.");
+      this.kilos -= cantidadVenta;
     }
   },
-  buy(){
-    let compra = parseInt(prompt("Cuantos kilos se han comprado: ")) || 0;
+  comprar() {
+    let cantidadCompra = parseInt(prompt("¿Cuántos kilos se han comprado?")) || 0;
 
-
-    if (compra == 0) {
-      console.log("No se ha comprado nada");
-    }else{
-      console.log("Compra efectuada");
-      this.kilos = this.kilos + compra;
+    if (cantidadCompra === 0) {
+      console.log("No se ha comprado nada.");
+    } else {
+      console.log("Compra realizada.");
+      this.kilos += cantidadCompra;
     }
   },
-  outOfStockDate(){
+  fechaAgotado() {
     return true;
   },
-  buyingDate(){
+  fechaCompra() {
     return true;
   }
- }
+};
 
+console.log(frutas4.kilos);
+frutas4.vender();
+console.log(frutas4.kilos);
+frutas4.comprar();
+console.log(frutas4.kilos);
+frutas4.fechaCompra();
+frutas4.fechaAgotado();
 
- console.log(frutas.kilos);
- frutas.sell();
- console.log(frutas.kilos);
- frutas.buy();
- console.log(frutas.kilos);
- frutas.buyingDate();
- frutas.outOfStockDate();
-
-//ejer10
-let partesCoche = {
-  parte1: {
+// ejer10
+let piezasCoche = {
+  pieza1: {
     nombre: "Motor",
     cantidad: 100
   },
-  parte2: {
+  pieza2: {
     nombre: "Filtro de aceite",
     cantidad: 150
   },
-  parte3: {
+  pieza3: {
     nombre: "Amortiguador",
     cantidad: 200
   },
-  parte4: {
+  pieza4: {
     nombre: "Filtro de aire",
     cantidad: 120
   },
-  sumaPartes(){
-    return this.parte1.cantidad + this.parte2.cantidad + this.parte3.cantidad + this.parte4.cantidad;
+  sumarCantidadPiezas() {
+    let suma = 0;
+    for (let key in this) {
+      if (this[key].cantidad) {
+        suma += this[key].cantidad;
+      }
+    }
+    return suma;
   }
 };
-console.log(partesCoche.sumaPartes());
 
-//ejer11
+console.log(piezasCoche.sumarCantidadPiezas());
+
+// ejer11
 function crearUsuario(nombre, direccion, altura, anchura) {
-  let aux = {
-    user:{
+  let usuario = {
+    user: {
       nombre: nombre,
       direccion: direccion,
-      dimensiones:{
+      dimensiones: {
         altura: altura,
         anchura: anchura
       }
     }
-  }
-  return aux;
+  };
+  return usuario;
 }
 
+let usuario11 = crearUsuario("usuario1", "Calle Merlo", 170, 90);
+let usuario2 = { ...usuario11 }; // Se puede usar spread para clonar el objeto
+console.log(usuario11);
 
-let usuario1 = crearUsuario("usuario1", "Calle Merlo", 170, 90)
-let usuario2 = structuredClone(usuario1);
-console.log(usuario1);
-
-//ejer12
-function crearUsuario(nombre, direccion, altura, anchura) {
-  let aux = {
-    user:{
+// ejer12
+function crearUsuario2(nombre, direccion, altura, anchura) {
+  let usuario = {
+    user: {
       nombre: nombre,
       direccion: direccion,
-      dimensiones:{
+      dimensiones: {
         altura: altura,
         anchura: anchura
-      },
-    },
-      infoUsuario(){
-        return this.user;
-      },
-      devolverAmigos(){
-        return this.user?.amigos;
-      },
-      devolverPareja(){
-        return this.user?.pareja;
       }
-  }
-  return aux;
+    },
+    obtenerInfoUsuario() {
+      return this.user;
+    },
+    obtenerAmigos() {
+      return this.user?.amigos;
+    },
+    obtenerPareja() {
+      return this.user?.pareja;
+    }
+  };
+  return usuario;
 }
 
-
-let usuario1 = crearUsuario("usuario1", "Calle Merlo", 170, 90)
-console.log(usuario1.infoUsuario());
-console.log(usuario1.devolverAmigos());
-console.log(usuario1.devolverPareja());
+let usuario12 = crearUsuario2("usuario1", "Calle Merlo", 170, 90);
+console.log(usuario12.obtenerInfoUsuario());
+console.log(usuario12.obtenerAmigos());
+console.log(usuario12.obtenerPareja());

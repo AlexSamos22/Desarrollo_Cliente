@@ -1,229 +1,199 @@
-//EJER1
-let animal = {
-    familia: "",
-    numeroPatas: 0,
-    seMueve: "",
-  }
-  
-  let gato = {
-  
-  }
-  
-  let spider = {
-  
-  }
-  
-  let conejo = {
-  
-  }
-  
-  Object.setPrototypeOf(gato, animal);
-  Object.setPrototypeOf(spider, animal);
-  Object.setPrototypeOf(conejo, animal);
-  
-  gato.familia = "felino";
-  gato.numeroPatas = 4;
-  gato.seMueve = "andando";
-  
-  spider.familia = "aracnidos";
-  spider.numeroPatas = 8;
-  spider.seMueve = "trepan";
-  
-  conejo.familia = "leporidos";
-  conejo.numeroPatas = 4;
-  conejo.seMueve = "saltando";
-  
-  for (let valor in conejo){
-    console.log(valor +": "+conejo[valor]);
-  }
-  
-  for (let valor in spider){
-    console.log(valor + ": "+ spider[valor]);
-  }
-  
-  for (let valor in gato){
-    console.log(valor + ": " + gato[valor]);
-  }
+// EJER1
+let criatura = {
+  familia: "",
+  numeroPatas: 0,
+  seMueve: "",
+};
 
-//EJER2
-let persona = { 
-    bolsillo: 0, 
-    listaTareas: [], 
-    cobraSueldo(dinero){
-      this.bolsillo=dinero;
-    },
-    anyadeTarea(tarea){ 
-      if (this.listaTareas.length == 0) {
-          this.listaTareas = [];
-      }
-          this.listaTareas.push(tarea); 
-      
-    },
-  }; 
-  
-  let informatico = { 
-  
-  };
-  
-  let ordenanza = {
-  
-  };
-    
-  Object.setPrototypeOf(informatico, persona);
-  Object.setPrototypeOf(ordenanza, persona);
-  
-  informatico.cobraSueldo(3000);
-  informatico.anyadeTarea("Programa en javaScript");
-  console.log(informatico.bolsillo);
-  console.log(informatico.listaTareas);
-  
-  
-  ordenanza.cobraSueldo(1500);
-  ordenanza.anyadeTarea("Organizar grupos trabajo");
-  console.log(ordenanza.bolsillo);
-  console.log(ordenanza.listaTareas);
+let gatoEjemplo = {};
+let aranaEjemplo = {};
+let conejoEjemplo = {};
 
-//EJER3
-let persona = { 
-    bolsillo: 0, 
-    listaTareas: [], 
-    cobraSueldo(dinero){
-      this.bolsillo=dinero;
-    },
-    anyadeTarea(tarea){ 
-      if (this.listaTareas.length == 0) {
-          this.listaTareas = [];
-      }
-          this.listaTareas.push(tarea); 
-      
-    },
-    quitarTarea(tarea){
-      for (let i = 0; i < this.listaTareas.length; i++) {
-        if (tarea == this.listaTareas[i]) {
-          this.listaTareas.splice(i, 1);
-        }
-      }
-      }
-  }; 
-  
-  let informatico = { 
-  
-  };
-  
-  let ordenanza = {
-  
-  };
-    
-  Object.setPrototypeOf(informatico, persona);
-  Object.setPrototypeOf(ordenanza, persona);
-  
-  informatico.cobraSueldo(3000);
-  informatico.anyadeTarea("Programa en javaScript");
-  informatico.anyadeTarea("Suma.js");
-  console.log(informatico.bolsillo);
-  console.log(informatico.listaTareas);
-  informatico.quitarTarea("Suma.js");
-  console.log(informatico.listaTareas);
-  
-  
-  ordenanza.cobraSueldo(1500);
-  ordenanza.anyadeTarea("Organizar grupos trabajo");
-  console.log(ordenanza.bolsillo);
-  console.log(ordenanza.listaTareas);
+Object.setPrototypeOf(gatoEjemplo, criatura);
+Object.setPrototypeOf(aranaEjemplo, criatura);
+Object.setPrototypeOf(conejoEjemplo, criatura);
 
-  //EJER4
-  let vehiculos = {
-    tipo: "",
-    numeroRuedas: 0,
-    tipoMotor: "",
-    velocidad: 0,
-    kilometros: 0,
-    acelerar(velocidad){
-      this.velocidad += velocidad;
-    },
-    parar(velocidad){
-      this.velocidad -= velocidad;
-    },
-    frenar(){
-      this.velocidad = 0;
-    },
-    añadirVelocidad(nuevaVelocidad){
-      this.velocidad = nuevaVelocidad;
-    },
-    kilometrosActuales(nuevoKm){
-      this.kilometros = nuevoKm;
+gatoEjemplo.familia = "felino";
+gatoEjemplo.numeroPatas = 4;
+gatoEjemplo.seMueve = "andando";
+
+aranaEjemplo.familia = "aracnidos";
+aranaEjemplo.numeroPatas = 8;
+aranaEjemplo.seMueve = "trepan";
+
+conejoEjemplo.familia = "leporidos";
+conejoEjemplo.numeroPatas = 4;
+conejoEjemplo.seMueve = "saltando";
+
+for (let valor in conejoEjemplo) {
+  console.log(valor + ": " + conejoEjemplo[valor]);
+}
+
+for (let valor in aranaEjemplo) {
+  console.log(valor + ": " + aranaEjemplo[valor]);
+}
+
+for (let valor in gatoEjemplo) {
+  console.log(valor + ": " + gatoEjemplo[valor]);
+}
+
+// EJER2
+let individuo = {
+  bolsillo: 0,
+  listaTareas: [],
+  cobraSueldo(dinero) {
+    this.bolsillo = dinero;
+  },
+  anyadeTarea(tarea) {
+    if (this.listaTareas.length === 0) {
+      this.listaTareas = [];
     }
-  }
-  
-  let yamaha_MT09 = {
-  
-  }
-  
-  let cupra_Formentor = {
-  
-  }
-  
-  Object.setPrototypeOf(yamaha_MT09, vehiculos);
-  Object.setPrototypeOf(cupra_Formentor, vehiculos);
-  
-  yamaha_MT09.tipo = "Moto";
-  yamaha_MT09.numeroRuedas = 2;
-  yamaha_MT09.tipoMotor = "890 cc";
-  yamaha_MT09.añadirVelocidad(60);
-  yamaha_MT09.kilometrosActuales(20000);
-  console.log(yamaha_MT09.velocidad);
-  console.log(yamaha_MT09.kilometros);
-  yamaha_MT09.acelerar(20);
-  console.log(yamaha_MT09.velocidad);
-  yamaha_MT09.parar(10);
-  console.log(yamaha_MT09.velocidad);
-  yamaha_MT09.frenar();
-  console.log(yamaha_MT09.velocidad);
-  
-  
-  cupra_Formentor.tipo = "Coche";
-  cupra_Formentor.numeroRuedas = 4;
-  cupra_Formentor.tipoMotor = "350 cc";
-  cupra_Formentor.añadirVelocidad(80);
-  cupra_Formentor.kilometrosActuales(15000);
-  console.log(cupra_Formentor.velocidad);
-  console.log(cupra_Formentor.kilometros);
-  cupra_Formentor.acelerar(20);
-  console.log(cupra_Formentor.velocidad);
-  cupra_Formentor.parar(10);
-  console.log(cupra_Formentor.velocidad);
-  cupra_Formentor.frenar();
-  console.log(cupra_Formentor.velocidad);
+    this.listaTareas.push(tarea);
+  },
+};
 
-  //Ejer5
-  let animal = {
-    nombre: "",
-    comer(){
-      console.log(`El ${this.nombre} esta comiendo`);
-    },
-    dormir(){
-      console.log(`El ${this.nombre} esta durmiendo`);
+let desarrollador = {};
+let conserje = {};
+
+Object.setPrototypeOf(desarrollador, individuo);
+Object.setPrototypeOf(conserje, individuo);
+
+desarrollador.cobraSueldo(3000);
+desarrollador.anyadeTarea("Programa en JavaScript");
+console.log(desarrollador.bolsillo);
+console.log(desarrollador.listaTareas);
+
+conserje.cobraSueldo(1500);
+conserje.anyadeTarea("Organizar grupos de trabajo");
+console.log(conserje.bolsillo);
+console.log(conserje.listaTareas);
+
+// EJER3
+let personaEjemplo = {
+  bolsillo: 0,
+  listaTareas: [],
+  cobraSueldo(dinero) {
+    this.bolsillo = dinero;
+  },
+  anyadeTarea(tarea) {
+    if (this.listaTareas.length === 0) {
+      this.listaTareas = [];
     }
-  }
-  
-  let mamifero = {
-    patas: "",
-    especie: "",
-    seAlimenta(comida){
-      console.log(`El ${this.nombre} se alimenta de ${comida}`);
+    this.listaTareas.push(tarea);
+  },
+  quitarTarea(tarea) {
+    for (let i = 0; i < this.listaTareas.length; i++) {
+      if (tarea === this.listaTareas[i]) {
+        this.listaTareas.splice(i, 1);
+      }
     }
-  }
-  
-  Object.setPrototypeOf(mamifero, animal);
-  
-  let perro = {
-  
-  }
-  
-  Object.setPrototypeOf(perro, mamifero);
-  
-  perro.nombre = "Pastor Aleman";
-  perro.especie = "Canidos";
-  perro.seAlimenta("pienso");
-  perro.comer();
-  perro.dormir();
+  },
+};
+
+let informaticoEjemplo = {};
+let ordenanzaEjemplo = {};
+
+Object.setPrototypeOf(informaticoEjemplo, personaEjemplo);
+Object.setPrototypeOf(ordenanzaEjemplo, personaEjemplo);
+
+informaticoEjemplo.cobraSueldo(3000);
+informaticoEjemplo.anyadeTarea("Programa en JavaScript");
+informaticoEjemplo.anyadeTarea("Suma.js");
+console.log(informaticoEjemplo.bolsillo);
+console.log(informaticoEjemplo.listaTareas);
+informaticoEjemplo.quitarTarea("Suma.js");
+console.log(informaticoEjemplo.listaTareas);
+
+ordenanzaEjemplo.cobraSueldo(1500);
+ordenanzaEjemplo.anyadeTarea("Organizar grupos de trabajo");
+console.log(ordenanzaEjemplo.bolsillo);
+console.log(ordenanzaEjemplo.listaTareas);
+
+// EJER4
+let vehiculo = {
+  tipo: "",
+  numeroRuedas: 0,
+  tipoMotor: "",
+  velocidad: 0,
+  kilometros: 0,
+  acelerar(velocidad) {
+    this.velocidad += velocidad;
+  },
+  parar(velocidad) {
+    this.velocidad -= velocidad;
+  },
+  frenar() {
+    this.velocidad = 0;
+  },
+  añadirVelocidad(nuevaVelocidad) {
+    this.velocidad = nuevaVelocidad;
+  },
+  kilometrosActuales(nuevoKm) {
+    this.kilometros = nuevoKm;
+  },
+};
+
+let motoYamaha = {};
+let cocheCupra = {};
+
+Object.setPrototypeOf(motoYamaha, vehiculo);
+Object.setPrototypeOf(cocheCupra, vehiculo);
+
+motoYamaha.tipo = "Moto";
+motoYamaha.numeroRuedas = 2;
+motoYamaha.tipoMotor = "890 cc";
+motoYamaha.añadirVelocidad(60);
+motoYamaha.kilometrosActuales(20000);
+console.log(motoYamaha.velocidad);
+console.log(motoYamaha.kilometros);
+motoYamaha.acelerar(20);
+console.log(motoYamaha.velocidad);
+motoYamaha.parar(10);
+console.log(motoYamaha.velocidad);
+motoYamaha.frenar();
+console.log(motoYamaha.velocidad);
+
+cocheCupra.tipo = "Coche";
+cocheCupra.numeroRuedas = 4;
+cocheCupra.tipoMotor = "350 cc";
+cocheCupra.añadirVelocidad(80);
+cocheCupra.kilometrosActuales(15000);
+console.log(cocheCupra.velocidad);
+console.log(cocheCupra.kilometros);
+cocheCupra.acelerar(20);
+console.log(cocheCupra.velocidad);
+cocheCupra.parar(10);
+console.log(cocheCupra.velocidad);
+cocheCupra.frenar();
+console.log(cocheCupra.velocidad);
+
+// Ejer5
+let serViviente = {
+  nombre: "",
+  alimentarse() {
+    console.log(`El ${this.nombre} se está alimentando.`);
+  },
+  dormir() {
+    console.log(`El ${this.nombre} está durmiendo.`);
+  },
+};
+
+let criaturaViviente = {
+  cantidadPatas: "",
+  especieAnimal: "",
+  seAlimenta(comida) {
+    console.log(`El ${this.nombre} se alimenta de ${comida}`);
+  },
+};
+
+Object.setPrototypeOf(criaturaViviente, serViviente);
+
+let perroPastor = {};
+
+Object.setPrototypeOf(perroPastor, criaturaViviente);
+
+perroPastor.nombre = "Pastor Belga";
+perroPastor.especieAnimal = "Canidos";
+perroPastor.seAlimenta("comida seca");
+perroPastor.alimentarse();
+perroPastor

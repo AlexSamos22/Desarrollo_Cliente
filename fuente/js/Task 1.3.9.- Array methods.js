@@ -1,159 +1,131 @@
-//EJERCICIO 1
-let cadena = "hola-adios-bye";
+// EJER1
+let cadenaTexto = "hola-adios-bye";
 function camelize(cadena) {
-  let arr = cadena.split("-");
-  let palabraNueva = "";
-  for (let i = 0; i < arr.length; i++) {
-    if (i > 0) {
-       palabraNueva.join(arr[i].slice(0,1).toUpperCase() + arr[i].slice(1));
-    }else{
-      palabraNueva.join(arr[i])
-    }
+  let palabras = cadena.split("-");
+  let nuevaCadena = palabras[0];
+  for (let i = 1; i < palabras.length; i++) {
+    nuevaCadena += palabras[i].charAt(0).toUpperCase() + palabras[i].slice(1);
   }
-  return palabraNueva;
+  return nuevaCadena;
 }
 
+console.log(camelize(cadenaTexto));
 
-console.log(camelize(cadena));
-
-//EJERCICIO 2
-let arr = [1,2,4,5,6,7,8,9,10,11,12,13]
-function filter(arr, a, b) {
-  return arr.filter(elemento=>(elemento >= a && elemento <= b));
+// EJER2
+let arrayNumeros = [1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+function filtrar(arr, a, b) {
+  return arr.filter(elemento => elemento >= a && elemento <= b);
 }
 
+console.log(filtrar(arrayNumeros, 5, 10));
 
-console.log(filter(arr,5,10));
-
-//EJER3
-let arr = [1,2,3,4,5,6,7,8,9,10,11,12];
-
-function filterRangeInPlace(arr, a, b) {
+// EJER3
+let arrayNumeros2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+function filtrarRango(arr, a, b) {
   for (let i = arr.length - 1; i >= 0; i--) {
     let elementoActual = arr[i];
-   
     if (elementoActual <= a || elementoActual >= b) {
       arr.splice(i, 1);
     }
   }
 }
 
-filterRangeInPlace(arr,5,12);
+filtrarRango(arrayNumeros2, 5, 12);
+console.log(arrayNumeros2);
 
-console.log(arr);
+// EJER4
+let arrayNumeros3 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+let ordenDescendente = (a, b) => b - a;
+arrayNumeros3.sort(ordenDescendente);
+console.log(arrayNumeros3);
 
-//EJER4
-let arr = [1,2,3,4,5,6,7,8,9,10,11,12];
-let ordenDecreciente = (a,b) => b-a;
-arr.sort(ordenDecreciente);
-console.log(arr);
-
-//EJER5
+// EJER5
 let palabras = ["A", "B", "D", "C", "Z", "b", "a", "z", "y"];
-
-function copySorted(arr) {
-  let copiaArr = Array.from(arr);
+function copiarOrdenado(arr) {
+  let copiaArr = arr.slice();
   return copiaArr.sort();
 }
-console.log(copySorted(palabras));
+console.log(copiarOrdenado(palabras));
 
-//EJER6
-let users = [
-    {name: "Laura", age:20},
-    {name: "Pablo", age:30},
-    {name: "Juan", age:26},
+// EJER6
+let empleados = [
+  { name: "Laura", age: 20 },
+  { name: "Pablo", age: 30 },
+  { name: "Juan", age: 26 },
 ];
-let nombresEmpleados = users.map(usuarios => usuarios.name);
-console.log(nombresEmpleados)
-  
-//EJER7
-let objetos = [
-    {name: "Juan", surname: "Perez", id: 123},
-    {name: "Pedro", surname: "Gonzalez", id: 12},
-    {name: "Carla", surname: "Sanchez", id: 56},
-    {name: "Marta", surname: "Lopez", id: 30},
-]
+let nombresEmpleados = empleados.map(usuario => usuario.name);
+console.log(nombresEmpleados);
 
-let nuevoObjeto = objetos.map(persona => ({
-    nombreCompleto: `${persona.name} ${persona.surname}`,
-    id: persona.id
-    })
- );
+// EJER7
+let personas = [
+  { name: "Juan", surname: "Perez", id: 123 },
+  { name: "Pedro", surname: "Gonzalez", id: 12 },
+  { name: "Carla", surname: "Sanchez", id: 56 },
+  { name: "Marta", surname: "Lopez", id: 30 },
+];
 
+let nuevaListaPersonas = personas.map(persona => ({
+  nombreCompleto: `${persona.name} ${persona.surname}`,
+  id: persona.id
+}));
 
-console.log(nuevoObjeto);
-  
-//EJER8
-let objetos = [
-    {age: 78},
-    {age: 12},
-    {age: 56},
-    {age: 30},
-  ]
-  
-  
-  function sortByAge(users) {
-    let ordenarEdad = (a,b) => a.age-b.age;
-  
-  
-    users.sort(ordenarEdad);
-  }
-  
-  
-  sortByAge(objetos);
-  
-  
-  console.log(objetos);
-//EJER9
-let arr = [1,2,3,4,5,6,7,8,9]
+console.log(nuevaListaPersonas);
 
-function shuffle(array){
-  for (let i = array.length - 1; i >= 0; i--) {
-    let indiceRandom = Math.round(Math.random() * (i + 1));
-    let indiceActual = array[i];
-    array[i] = array[indiceRandom];
-    array[indiceRandom] = indiceActual;
+// EJER8
+let objetosEdades = [
+  { age: 78 },
+  { age: 12 },
+  { age: 56 },
+  { age: 30 },
+];
+
+function ordenarPorEdad(usuarios) {
+  let ordenarEdad = (a, b) => a.age - b.age;
+  usuarios.sort(ordenarEdad);
+}
+
+ordenarPorEdad(objetosEdades);
+console.log(objetosEdades);
+
+// EJER9
+let arrayNumeros4 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+function mezclar(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let indiceAleatorio = Math.floor(Math.random() * (i + 1));
+    [array[i], array[indiceAleatorio]] = [array[indiceAleatorio], array[i]];
   }
 }
 
-shuffle(arr);
-console.log(arr);
+mezclar(arrayNumeros4);
+console.log(arrayNumeros4);
 
-//EJER10
-let users = [
-    {name: "Juan", surname: "Perez", age: 15},
-    {name: "Pedro", surname: "Gonzalez", age: 25},
-    {name: "Carla", surname: "Sanchez", age: 56},
-    {name: "Marta", surname: "Lopez", age: 30},
-  ]
-  
-  
-function getAverageAge(users){
-    let contador = 0;
-    let sumaEdades = 0;
-    users.forEach(function(elemento){
-       sumaEdades = elemento.age + sumaEdades;
-       contador ++;
-    });
-    return sumaEdades / contador;
-}  
-console.log(getAverageAge(users));
-//EJER11
-let users = [
-    {id: 'john', name: "John Smith", age: 20},
-    {id: 'ann', name: "Ann Smith", age: 24},
-    {id: 'pete', name: "Pete Peterson", age: 31},
+// EJER10
+let usuariosEdades = [
+  { name: "Juan", surname: "Perez", age: 15 },
+  { name: "Pedro", surname: "Gonzalez", age: 25 },
+  { name: "Carla", surname: "Sanchez", age: 56 },
+  { name: "Marta", surname: "Lopez", age: 30 },
 ];
 
-function groupById(array) {
-    let nuevoObjeto = {};
-    nuevoObjeto = array.reduce((acumulador, valor) =>{
-   
-    let idActual = valor.id;
-    acumulador[idActual] = valor;
-    return acumulador;  
-    }, {});
-     return nuevoObjeto;
+function obtenerEdadPromedio(usuarios) {
+  let sumaEdades = usuarios.reduce((acumulador, usuario) => acumulador + usuario.age, 0);
+  return sumaEdades / usuarios.length;
 }
-   
-console.log(groupById(users));
+
+console.log(obtenerEdadPromedio(usuariosEdades));
+
+// EJER11
+let usuariosID = [
+  { id: 'john', name: "John Smith", age: 20 },
+  { id: 'ann', name: "Ann Smith", age: 24 },
+  { id: 'pete', name: "Pete Peterson", age: 31 },
+];
+
+function agruparPorId(array) {
+  return array.reduce((acumulador, valor) => {
+    acumulador[valor.id] = valor;
+    return acumulador;
+  }, {});
+}
+
+console.log(agruparPorId(usuariosID));
