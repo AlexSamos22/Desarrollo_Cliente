@@ -1,5 +1,11 @@
 // EJER1
 let cadenaTexto = "hola-adios-bye";
+/**
+ *
+ *
+ * @param {*} cadena
+ * @return {*} 
+ */
 function camelize(cadena) {
   let palabras = cadena.split("-");
   let nuevaCadena = palabras[0];
