@@ -5,18 +5,6 @@
  * @class Vehiculo
  */
 class Vehiculo{
-    /**
-     * Creates an instance of Vehiculo.
-     * @param {string} manufactura, tipo de manufactura del vehiculo
-     * @param {string} modelo, modelo del vehiculo
-     * @param {int} year, año de fabricacion del vehiculo
-     * @param {string} tipoIngenieria, engenieria del vehiculo
-     * @param {int} poder, poder del vehiculo
-     * @param {int} cm3, cm3 del vehiculo
-     * @param {int} velocidadMax, velicidad maxima que puede alcanzar el vehiculo
-     * @param {string} licenciaConducir, tipo de licencia del conductor del vehiculo 
-     * @memberof Vehiculo
-    */
     constructor(manufactura, modelo, year, tipoIngenieria, poder, cm3, velocidadMax, licenciaConducir){
         this.manufactura = manufactura;
         this.modelo = modelo;
@@ -112,6 +100,7 @@ class Vehiculo{
         this.velocidad -= nuevaVelocidad;
         return console.log("La nueva velocidad del vehiculo es: " + this.velocidad + " Km/h");
     }
+    
 }
 
 /**
@@ -409,6 +398,19 @@ class Animal {
         this.detenerse = true;
         return console.log(`${this.nombre} se detuvo.`);
     }
+    static compararPeso(animal1, animal2){
+        if(animal1.peso > animal2.peso){
+            return animal1.nombre + " pesa mas que " + animal2.peso; 
+          }else{
+            return animal2.peso + " pesa mas que " + animal1.peso; 
+          }
+    }
+
+    #setPeso(peso){
+        this.peso = peso;
+    }
+
+    
 }
 
 /**
@@ -571,6 +573,7 @@ class tablero{
             let mover;
             let num;
             let encontrado = false;
+            let posicion;
    
             for(let i = 0; i< numerosMovibles.length; i++){
                 listaNumeros += numerosMovibles[i] + " ";
@@ -579,15 +582,22 @@ class tablero{
             console.log("Los numeros que se pueden mover son: " + listaNumeros);
            
             do {
-                num = parseInt(prompt("¿Qué número quiere mover? "));
-                encontrado = numerosMovibles.includes(num);
+                num = prompt("¿Qué número quiere mover? (Dejar en blanco para reiniciar):  ");
+                if(num === ""){
+                    this.reiniciar();
+                    encontrado = true;
+                    return true;
+                }else{
+                    posicion = parseInt(num);
+                     encontrado = numerosMovibles.includes(posicion);
+                }
             } while (!encontrado);
 
            
            
             for (let i = 0; i < this.filas; i++) {
                 for (let j = 0; j < this.columnas; j++) {
-                    if (this.tablero[i][j] === num) {
+                    if (this.tablero[i][j] === posicion) {
                         mover = {fila: i, columna: j};
                     }
                 }
@@ -680,7 +690,6 @@ class tablero{
      */
     reiniciar(){
         this.generarTablero();
-        this.estadoDelJuego();
     }
   
     /**
@@ -718,17 +727,9 @@ class tablero{
   let reiniciar = "";
   juego.generarTablero();
   juego.encontrarEspacioBlanco();
-  let aux = 0;
   do {
     juego.estadoDelJuego();
-    if (aux > 0) {
-        reiniciar = prompt("¿Quieres reiniciar el juego? (si/no):  ");
-        if (reiniciar.toLowerCase() === "si") {
-            juego.reiniciar();
-        }
-    }
     juego.movimiento();
-    aux = 1;
 } while (!juego.verificarFinJuego());
 
   
@@ -966,3 +967,4 @@ do {
         }
     }
 } while (!juego2.finjuego());
+

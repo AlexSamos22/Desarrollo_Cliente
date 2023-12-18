@@ -48,7 +48,7 @@ console.log(arrayNumeros3);
 // EJER5
 let palabras = ["A", "B", "D", "C", "Z", "b", "a", "z", "y"];
 function copiarOrdenado(arr) {
-  let copiaArr = arr.slice();
+  let copiaArr = arr.slice(); 
   return copiaArr.sort();
 }
 console.log(copiarOrdenado(palabras));

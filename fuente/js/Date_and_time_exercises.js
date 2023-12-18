@@ -13,8 +13,9 @@ console.log(getDayOfWeek(2023, 11, 3));
 
 // EJER3
 function getMyBirthDayName(birthDate) {
+    let date;
     let daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    let date = birthDate;
+    date = birthDate;
     return daysOfWeek[date.getDay()];
 }
 

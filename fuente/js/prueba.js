@@ -209,6 +209,8 @@
   let binario = 0b111;
   let octal = 0o17;
   let hexadecimal = 0xf;
+
+  
   //2 formas de pasar a String, el metodo tpString no se puede hacer con valores nulos
   String(decimal) == decimal.toString();
 
@@ -928,5 +930,50 @@ class bicicleta extends miMixin(animal){
     this.tipo = tipo;
   }
 }
- */
 
+
+let obj = [
+  {nombre: "camisa", precio: 30, unidades: 2},
+  {nombre: "zapatos", precio: 50, unidades: 8},
+  {nombre: "chanclas", precio: 10, unidades: 4}
+]
+
+let obj2 = obj.map(elemento => {
+
+
+  return {nombre: elemento.nombre, precio: elemento.precio, unidades: elemento.unidades, precioTotal: elemento.precio * elemento.unidades}
+
+});
+
+console.log(obj2);
+let a = [];
+
+obj.forEach(function(elemento){
+  a.push({nombre: elemento.nombre, precio: elemento.precio, unidades: elemento.unidades, precioTotal: elemento.precio * elemento.unidades})
+})
+
+console.log(a);
+
+*/
+
+let arr = []
+
+let maximo = 70;
+for (let index = 0; index < 50; index++) {
+  arr.push(Math.floor(Math.random() * 71));
+}
+
+console.log(arr)
+
+let pares = arr.filter(elemento => elemento%2 == 0);
+
+let impares = arr.filter(elemento=> elemento%2 != 0);
+
+let numeroRandom = Math.floor(Math.random()* 11);
+console.log(numeroRandom);
+
+
+console.log(pares)
+console.log(impares)
+
+console.log(pares.map(elemento => elemento + numeroRandom));
