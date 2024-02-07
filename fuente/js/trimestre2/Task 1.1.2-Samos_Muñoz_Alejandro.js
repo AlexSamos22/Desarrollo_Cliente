@@ -9,14 +9,14 @@ console.log(document.getElementById("age-table").getElementsByTagName("label"));
 console.log(document.querySelectorAll("td")[1]);
 
 
-//El formulario con el nombre search
-console.log(document.querySelector("form[name=search]"));
+//El formulario con el nombre search-person
+console.log(document.querySelector("form[name=search-person]"));
 
 //El primer input del formulario
-console.log(document.querySelector("form[name=search]").querySelector("input"));
+console.log(document.querySelector("form[name=search-person]").querySelector("input"));
 
 //El ultimo input del formulario.
-let inputs = document.querySelector("form[name=search]").getElementsByTagName("input");
+let inputs = document.querySelector("form[name=search-person]").getElementsByTagName("input");
 console.log(inputs[inputs.length-1]);
 
 

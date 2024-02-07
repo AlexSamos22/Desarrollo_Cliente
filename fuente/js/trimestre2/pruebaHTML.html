@@ -10,7 +10,24 @@
         <script src="prueba.js" defer></script>
     </head>
     <body>
-        <section class="imagenes">
+
+        <header fecha="11/1/24">
+            <h1>Docuemento para probar cosas del DOM</h1>
+            <h2>vamos a probar cosas</h2>
+            <h3>esto va a acabar arriba</h3>
+            <p id="introduccion">parrafo introduccion al documento</p>
+        </header>
+
+        <section>
+            <form action="">
+                <input type="text" placeholder="nombre">
+                <input type="checkbox" disabled><label>opcion1</label>
+                <input type="checkbox" ><label>opcion2</label>
+                <input type="checkbox" ><label>opcion3</label>
+            </form>
+        </section>
+
+        <section id="sec-imagenes" class="imagenes img m20 borde_rojo">
             <p>Esto es un parrafo aleatorio</p>
             <article id="aleatorio">
                 <img src="https://picsum.photos/200/300" alt="imagen aleatoria">
@@ -21,11 +38,9 @@
                 <img src="img/gatito.webp" alt="gatito">
                 <p id="parrafo2" class="parrafo">Esto es un lindo gatito</p>
             </article>
-
         </section>
 
         <section>
-
             <article class="lista">
                     <ul>
                     <li id="primero">pan</li>
@@ -34,7 +49,6 @@
                     <li>tomate</li>
                 </ul>
             </article>
-
         </section>
         
         <section class="imagenes">
@@ -49,9 +63,15 @@
                 <img src="img/perrito.webp" alt="perrito">
                 <p id="parrafo2" class="parrafo">Esto es un lindo perrito</p>
             </article>
-
         </section>
-        
+        <article>
+            <ul>
+                <li>mango</li>
+                <li>chirimoya</li>
+                <li>pera</li>
+                <li>platano</li>
+            </ul>
+        </article>
         
     </body>
 </html>

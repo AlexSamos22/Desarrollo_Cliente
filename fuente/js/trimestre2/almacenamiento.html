@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="almacenamiento.js" defer></script>
+</head>
+<body>
+    <section>
+        <article class="contenedor-flex">
+            <form id="cookie">
+                <fieldset>
+                    <input type="text" name="nombre" placeholder="nombre" required>
+                    <input type="text" name="valor" placeholder="valor" required>
+                </fieldset>
+                <input type="text" name="expires" value="01/01/2030" placeholder="expire">
+                <input type="text" name="max-age" value="3600" placeholder="max-age">
+                <input type="text" name="path" placeholder="path">
+                <input type="text" name="domain" placeholder="domain">
+                <input type="checkbox" name="secure" placeholder="secure">
+                <fieldset>
+                    <label>SameSite</label>
+                   <input type="radio" id="strict" name="sameSite"> 
+                   <input type="radio" id="lax" name="sameSite"><!--Si existe un enlace a la otra web--> 
+                   <input type="radio" id="none" name="sameSite"> 
+                </fieldset>
+                <button id="crearCookie">Crear cookie</button>
+                <button id="mostrarCookie">Mostrar cookies</button>
+            </form>
+
+            <form id="cookie2">
+                <fieldset>
+                    <input type="text" name="nombre1" placeholder="nombre">
+                    <input type="text" name="valor1" placeholder="valor">
+                </fieldset>
+                <fieldset>
+                    <input type="text" name="nombre2" placeholder="nombre">
+                    <input type="text" name="valor2" placeholder="valor">
+                </fieldset>
+                <fieldset>
+                    <input type="text" name="nombre3" placeholder="nombre">
+                    <input type="text" name="valor3" placeholder="valor">
+                </fieldset>
+                <button id="localeStorage">crear LocaleStorage</button>
+                <button id="create_complex_localeStorage">create_complex_localeStorage</button>
+                <button id="read_complex_localeStorage">read_complex_localeStorage</button>
+                <button id="remove_localeStorage"> remove_localeStorage</button>
+            </form>
+            
+        </article>
+    </section>
+</body>
+</html>
