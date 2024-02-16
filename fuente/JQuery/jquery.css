@@ -1,0 +1,27 @@
+#parrafo3{
+    background-color: coral;
+}
+
+.texto-enorme{
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.fondo-rojo{
+    background-color: red;
+}
+
+.borde-rojo{
+    border: 2px solid red;
+}
+
+img{
+    position: relative;
+}
+
+#caja{
+    width: 150px;
+    height: 100px;
+    background-color: lightgreen;
+    border: 1px solid darkgreen;
+}
